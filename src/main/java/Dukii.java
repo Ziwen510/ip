@@ -9,8 +9,10 @@ public class Dukii {
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine().trim();
             if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println("Bye~ Have a good day!");
                 break;
+            } else {
+                System.out.println(input + "!!");
             }
         }
         scanner.close();
