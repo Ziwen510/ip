@@ -23,12 +23,37 @@ public class Dukii {
                         System.out.println((i + 1) + "." + tasks.get(i));
                     }
                 }
-            } else if (input.startsWith("add ")) {
-                String taskDescription = input.substring(4).trim();
+            } else if (input.startsWith("todo ")) {
+                String taskDescription = input.substring(5).trim();
                 if (taskDescription.isEmpty()) {
                     System.out.println("What do you want to add?");
                 } else {
-                    tasks.add(new Task(taskDescription));
+                    tasks.add(new ToDo(taskDescription));
+                    System.out.println("Got it. I've added this todo:");
+                    System.out.println("  " + tasks.get(tasks.size() - 1));
+                    System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
+                }
+            } else if (input.startsWith("event ")) {
+                String[] parts = input.substring(6).trim().split(" from ");
+                if (parts.length != 2 || parts[0].isEmpty() || parts[1].isEmpty()) {
+                    System.out.println("Oopsie! Please use: event <description> from <start_time> to <end_time>");
+                } else {
+                    String[] timeParts = parts[1].trim().split(" to ");
+                    if (timeParts.length != 2 || timeParts[0].isEmpty() || timeParts[1].isEmpty()) {
+                        System.out.println("Oopsie! Please use: event <description> from <start_time> to <end_time>");
+                    } else {
+                        tasks.add(new Event(parts[0].trim(), timeParts[0].trim(), timeParts[1].trim()));
+                        System.out.println("Got it. I've added this event:");
+                        System.out.println("  " + tasks.get(tasks.size() - 1));
+                        System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
+                    }
+                }
+            } else if (input.startsWith("deadline ")) {
+                String[] parts = input.substring(9).trim().split(" by ");
+                if (parts.length != 2 || parts[0].isEmpty() || parts[1].isEmpty()) {
+                    System.out.println("Oopsie! Please use: deadline <description> by <time>");
+                } else {
+                    tasks.add(new Deadline(parts[0].trim(), parts[1].trim()));
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + tasks.get(tasks.size() - 1));
                     System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
@@ -70,43 +95,9 @@ public class Dukii {
                     System.out.println("What task do you want to unmark?");
                 }
             } else {
-                if (input.isEmpty()) {
-                    System.out.println("What can I do for you?");
-                } else {
-                    tasks.add(new Task(input));
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + tasks.get(tasks.size() - 1));
-                    System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
-                }
+                System.out.println("What can I do for you?");
             }
         }
         scanner.close();
-    }
-}
-
-class Task {
-    private String description;
-    private boolean isDone;
-    
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-    
-    public void markAsDone() {
-        this.isDone = true;
-    }
-    
-    public void markAsPending() {
-        this.isDone = false;
-    }
-    
-    public boolean isDone() {
-        return this.isDone;
-    }
-    
-    @Override
-    public String toString() {
-        return "[" + (isDone ? "X" : " ") + "] " + description;
     }
 }
