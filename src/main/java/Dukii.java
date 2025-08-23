@@ -23,7 +23,7 @@ public class Dukii {
                         System.out.println((i + 1) + "." + tasks.get(i));
                     }
                 }
-            } else if (input.startsWith("add:")) {
+            } else if (input.startsWith("add ")) {
                 String taskDescription = input.substring(4).trim();
                 if (taskDescription.isEmpty()) {
                     System.out.println("What do you want to add?");
@@ -37,9 +37,14 @@ public class Dukii {
                 try {
                     int taskIndex = Integer.parseInt(input.substring(5).trim()) - 1;
                     if (taskIndex >= 0 && taskIndex < tasks.size()) {
-                        tasks.get(taskIndex).markAsDone();
-                        System.out.println("Good job sweety! I've marked this task as done:");
-                        System.out.println("  " + tasks.get(taskIndex));
+                        Task task = tasks.get(taskIndex);
+                        if (task.isDone()) {
+                            System.out.println("This task is already marked as done~");
+                        } else {
+                            task.markAsDone();
+                            System.out.println("Good job sweety! I've marked this task as done:");
+                            System.out.println("  " + task);
+                        }
                     } else {
                         System.out.println("What task do you want to mark as done?");
                     }
@@ -50,9 +55,14 @@ public class Dukii {
                 try {
                     int taskIndex = Integer.parseInt(input.substring(7).trim()) - 1;
                     if (taskIndex >= 0 && taskIndex < tasks.size()) {
-                        tasks.get(taskIndex).markAsPending();
-                        System.out.println("OK, I've marked this task as not done yet:");
-                        System.out.println("  " + tasks.get(taskIndex));
+                        Task task = tasks.get(taskIndex);
+                        if (!task.isDone()) {
+                            System.out.println("This task is not marked as done yet~");
+                        } else {
+                            task.markAsPending();
+                            System.out.println("OK, I've marked this task as not done yet:");
+                            System.out.println("  " + task);
+                        }
                     } else {
                         System.out.println("What task do you want to unmark?");
                     }
@@ -89,6 +99,10 @@ class Task {
     
     public void markAsPending() {
         this.isDone = false;
+    }
+    
+    public boolean isDone() {
+        return this.isDone;
     }
     
     @Override
