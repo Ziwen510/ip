@@ -9,8 +9,8 @@ Oopsie! Hmm, I'm a bit confused! Please tell me: event <description> from <start
 Oopsie! I need both start and end times, honey! Use: event <description> from <start_time> to <end_time>
 Oopsie! Honey, I need to know when this is due! Please use: deadline <description> by <time>
 Oopsie! Sweetie, I need both the task and when it's due! Try: deadline <description> by <time>
-Oopsie! Sweetie, I need both the task and when it's due! Try: deadline <description> by <time>
-Oopsie! What would you like me to add to your list, sweety?
+Oopsie! Honey, I need to know when this is due! Please use: deadline <description> by <time>
+Oopsie! Oh honey, I'm not sure what you mean by that! Could you try one of my commands?
 Oopsie! Oh sweety, there are no tasks to mark! Your list is empty.
 Oopsie! Oh sweety, there are no tasks to unmark! Your list is empty.
 Oopsie! Oh sweety, there are no tasks to delete! Your list is empty.
@@ -27,9 +27,9 @@ Here are the tasks in your list:
 1.[T][ ] buy milk
 2.[E][ ] meet friend (from: 3pm to: 4pm)
 3.[D][ ] submit report (by: tonight)
-Oopsie! Honey, which task would you like me to mark as done? Please provide a number!
-Oopsie! Honey, which task should I unmark? Please give me a number!
-Oopsie! Sweetie, which task would you like me to remove? Please provide a number!
+Oopsie! Oh honey, I'm not sure what you mean by that! Could you try one of my commands?
+Oopsie! Oh honey, I'm not sure what you mean by that! Could you try one of my commands?
+Oopsie! Oh honey, I'm not sure what you mean by that! Could you try one of my commands?
 Oopsie! Sweetie, I need a real number to mark the task! Please try again.
 Oopsie! Honey, I need a proper number to unmark the task! Please try again.
 Oopsie! Honey, I need a real number to delete the task! Please try again.
@@ -49,4 +49,3 @@ Here are the tasks in your list:
 1.[T][ ] buy milk
 2.[D][ ] submit report (by: tonight)
 Bye~ Have a good day!
-
