@@ -1,7 +1,52 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello sweety~ I'm Dukii!
+A new day starts! What can I do for you today?
+What can I do for you?
+No task there! Enjoy your day sweety~
+Oopsie! Oh honey, I'm not sure what you mean by that! Could you try one of my commands?
+Oopsie! Sweetie, for events I need to know when they start and end! Try: event <description> from <start_time> to <end_time>
+Oopsie! I need both start and end times, honey! Use: event <description> from <start_time> to <end_time>
+Oopsie! Hmm, I'm a bit confused! Please tell me: event <description> from <start_time> to <end_time>
+Oopsie! I need both start and end times, honey! Use: event <description> from <start_time> to <end_time>
+Oopsie! Honey, I need to know when this is due! Please use: deadline <description> by <time>
+Oopsie! Sweetie, I need both the task and when it's due! Try: deadline <description> by <time>
+Oopsie! Sweetie, I need both the task and when it's due! Try: deadline <description> by <time>
+Oopsie! What would you like me to add to your list, sweety?
+Oopsie! Oh sweety, there are no tasks to mark! Your list is empty.
+Oopsie! Oh sweety, there are no tasks to unmark! Your list is empty.
+Oopsie! Oh sweety, there are no tasks to delete! Your list is empty.
+Got it. I've added this todo:
+  [T][ ] buy milk
+Now you have 1 task(s) in the list.
+Got it. I've added this event:
+  [E][ ] meet friend (from: 3pm to: 4pm)
+Now you have 2 task(s) in the list.
+Got it. I've added this task:
+  [D][ ] submit report (by: tonight)
+Now you have 3 task(s) in the list.
+Here are the tasks in your list:
+1.[T][ ] buy milk
+2.[E][ ] meet friend (from: 3pm to: 4pm)
+3.[D][ ] submit report (by: tonight)
+Oopsie! Honey, which task would you like me to mark as done? Please provide a number!
+Oopsie! Honey, which task should I unmark? Please give me a number!
+Oopsie! Sweetie, which task would you like me to remove? Please provide a number!
+Oopsie! Sweetie, I need a real number to mark the task! Please try again.
+Oopsie! Honey, I need a proper number to unmark the task! Please try again.
+Oopsie! Honey, I need a real number to delete the task! Please try again.
+Oopsie! Oh dear! That task number doesn't exist. Please choose between 1 and 3.
+Oopsie! Oops! That task number is out of range. Please pick between 1 and 3.
+Oopsie! Oh no! That task number doesn't exist. Please choose between 1 and 3.
+Good job sweety! I've marked this task as done:
+  [T][X] buy milk
+This task is already marked as done~
+OK, I've marked this task as not done yet:
+  [T][ ] buy milk
+This task is not marked as done yet~
+Noted. I've removed this task:
+  [E][ ] meet friend (from: 3pm to: 4pm)
+Now you have 2 task(s) in the list.
+Here are the tasks in your list:
+1.[T][ ] buy milk
+2.[D][ ] submit report (by: tonight)
+Bye~ Have a good day!
 
