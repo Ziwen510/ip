@@ -27,6 +27,8 @@ public class Dukii {
                     handleMarkCommand(input);
                 } else if (input.startsWith("unmark ")) {
                     handleUnmarkCommand(input);
+                } else if (input.startsWith("delete ")) {
+                    handleDeleteCommand(input);
                 } else if (input.isEmpty()) {
                     System.out.println("What can I do for you?");
                 } else {
@@ -139,6 +141,28 @@ public class Dukii {
             }
         } catch (NumberFormatException e) {
             throw new DukiiException("Honey, I need a proper number to unmark the task! Please try again.");
+        }
+    }
+    
+    private static void handleDeleteCommand(String input) throws DukiiException {
+        if (tasks.isEmpty()) {
+            throw new DukiiException("Oh sweety, there are no tasks to delete! Your list is empty.");
+        }
+        if (input.length() <= 7) {
+            throw new DukiiException("Sweetie, which task would you like me to remove? Please provide a number!");
+        }
+        try {
+            int taskIndex = Integer.parseInt(input.substring(7).trim()) - 1;
+            if (taskIndex < 0 || taskIndex >= tasks.size()) {
+                throw new DukiiException("Oh no! That task number doesn't exist. Please choose between 1 and " + tasks.size() + ".");
+            }
+            Task deletedTask = tasks.get(taskIndex);
+            tasks.remove(taskIndex);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println("  " + deletedTask);
+            System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
+        } catch (NumberFormatException e) {
+            throw new DukiiException("Honey, I need a real number to delete the task! Please try again.");
         }
     }
     
