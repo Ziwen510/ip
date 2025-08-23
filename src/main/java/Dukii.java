@@ -101,6 +101,9 @@ public class Dukii {
     }
     
     private static void handleMarkCommand(String input) throws DukiiException {
+        if (tasks.isEmpty()) {
+            throw new DukiiException("Oh sweety, there are no tasks to mark! Your list is empty.");
+        }
         if (input.length() <= 5) {
             throw new DukiiException("Honey, which task would you like me to mark as done? Please provide a number!");
         }
@@ -123,6 +126,9 @@ public class Dukii {
     }
     
     private static void handleUnmarkCommand(String input) throws DukiiException {
+        if (tasks.isEmpty()) {
+            throw new DukiiException("Oh sweety, there are no tasks to unmark! Your list is empty.");
+        }
         if (input.length() <= 7) {
             throw new DukiiException("Honey, which task should I unmark? Please give me a number!");
         }
