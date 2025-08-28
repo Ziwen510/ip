@@ -1,12 +1,19 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.IOException;
 
 public class Dukii {
     private static ArrayList<Task> tasks = new ArrayList<>();
+    private static Storage storage = new Storage("./data/dukii.txt");
     
     public static void main(String[] args) {
         System.out.println("Hello sweety~ I'm Dukii!");
         System.out.println("A new day starts! What can I do for you today?");
+        try {
+            tasks = storage.load();
+        } catch (IOException e) {
+            System.out.println("Oh no my sweety, I couldn't load your tasks. Starting fresh.");
+        }
 
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
@@ -19,16 +26,22 @@ public class Dukii {
                     handleListCommand();
                 } else if (input.startsWith("todo ")) {
                     handleTodoCommand(input);
+                    saveSafely();
                 } else if (input.startsWith("event ")) {
                     handleEventCommand(input);
+                    saveSafely();
                 } else if (input.startsWith("deadline ")) {
                     handleDeadlineCommand(input);
+                    saveSafely();
                 } else if (input.startsWith("mark ")) {
                     handleMarkCommand(input);
+                    saveSafely();
                 } else if (input.startsWith("unmark ")) {
                     handleUnmarkCommand(input);
+                    saveSafely();
                 } else if (input.startsWith("delete ")) {
                     handleDeleteCommand(input);
+                    saveSafely();
                 } else if (input.isEmpty()) {
                     System.out.println("What can I do for you?");
                 } else {
@@ -43,6 +56,14 @@ public class Dukii {
         scanner.close();
     }
     
+    private static void saveSafely() {
+        try {
+            storage.save(tasks);
+        } catch (IOException e) {
+            System.out.println("Oh no my sweety, I couldn't save your tasks. Please try again.");
+        }
+    }
+
     private static void handleListCommand() {
         if (tasks.isEmpty()) {
             System.out.println("No task there! Enjoy your day sweety~");
