@@ -1,6 +1,7 @@
 package dukii.task;
 
 public abstract class Task {
+    
     protected String description;
     protected boolean isDone;
     
@@ -10,19 +11,19 @@ public abstract class Task {
     }
     
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
     
     public void markAsPending() {
-        this.isDone = false;
+        isDone = false;
     }
     
     public boolean isDone() {
-        return this.isDone;
+        return isDone;
     }
     
     public abstract String getTaskType();

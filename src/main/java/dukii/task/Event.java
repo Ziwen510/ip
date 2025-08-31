@@ -4,8 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private LocalDate fromDate;
-    private LocalDate toDate;
+    
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
+    
+    private final LocalDate fromDate;
+    private final LocalDate toDate;
 
     public Event(String description, LocalDate fromDate, LocalDate toDate) {
         super(description);
@@ -14,11 +17,11 @@ public class Event extends Task {
     }
     
     public LocalDate getFromDate() {
-        return this.fromDate;
+        return fromDate;
     }
 
     public LocalDate getToDate() {
-        return this.toDate;
+        return toDate;
     }
 
     @Override
@@ -28,9 +31,9 @@ public class Event extends Task {
     
     @Override
     public String toString() {
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMM d yyyy");
-        String fromDisplay = fromDate.format(fmt);
-        String toDisplay = toDate.format(fmt);
-        return "[" + getTaskType() + "][" + (isDone ? "X" : " ") + "] " + description + " (from: " + fromDisplay + " to: " + toDisplay + ")";
+        String fromDisplay = fromDate.format(DATE_FORMATTER);
+        String toDisplay = toDate.format(DATE_FORMATTER);
+        return "[" + getTaskType() + "][" + (isDone ? "X" : " ") + "] " + description + 
+               " (from: " + fromDisplay + " to: " + toDisplay + ")";
     }
 }

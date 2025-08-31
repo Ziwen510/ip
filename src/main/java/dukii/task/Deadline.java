@@ -4,7 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private LocalDate byDate;
+    
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
+    
+    private final LocalDate byDate;
 
     public Deadline(String description, LocalDate byDate) {
         super(description);
@@ -12,7 +15,7 @@ public class Deadline extends Task {
     }
 
     public LocalDate getByDate() {
-        return this.byDate;
+        return byDate;
     }
 
     @Override
@@ -22,7 +25,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String display = byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String display = byDate.format(DATE_FORMATTER);
         return "[" + getTaskType() + "][" + (isDone ? "X" : " ") + "] " + description + " (by: " + display + ")";
     }
 }

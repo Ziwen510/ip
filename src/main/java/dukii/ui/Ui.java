@@ -1,6 +1,7 @@
 package dukii.ui;
 
 public class Ui {
+    
     public void showMessage(String message) {
         System.out.println(message);
     }
