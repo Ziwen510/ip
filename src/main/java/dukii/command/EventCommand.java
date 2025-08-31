@@ -24,7 +24,6 @@ public class EventCommand extends Command {
     private final LocalDate fromDate;
     private final LocalDate toDate;
     
-<<<<<<< HEAD
     /**
      * Constructs a new EventCommand with the specified description and date range.
      * 
@@ -32,15 +31,12 @@ public class EventCommand extends Command {
      * @param fromDate the start date of the event
      * @param toDate the end date of the event
      */
-=======
->>>>>>> branch-A-CodingStandard
     public EventCommand(String description, LocalDate fromDate, LocalDate toDate) {
         this.description = description;
         this.fromDate = fromDate;
         this.toDate = toDate;
     }
     
-<<<<<<< HEAD
     /**
      * Executes the event command by adding a new event task to the task list.
      * 
@@ -52,8 +48,6 @@ public class EventCommand extends Command {
      * @param ui the user interface for displaying messages
      * @param storage the storage system (not used in this command)
      */
-=======
->>>>>>> branch-A-CodingStandard
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(new Event(description, fromDate, toDate));

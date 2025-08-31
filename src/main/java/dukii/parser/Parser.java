@@ -14,6 +14,7 @@ import dukii.command.*;
  * <ul>
  *   <li>bye - exits the application</li>
  *   <li>list - displays all tasks</li>
+ *   <li>find &lt;keyword&gt; - searches for tasks containing the keyword</li>
  *   <li>todo &lt;description&gt; - creates a new todo task</li>
  *   <li>deadline &lt;description&gt; by &lt;date&gt; - creates a deadline task</li>
  *   <li>event &lt;description&gt; from &lt;start_date&gt; to &lt;end_date&gt; - creates an event task</li>
@@ -28,22 +29,6 @@ import dukii.command.*;
  * @version 1.0
  */
 public class Parser {
-<<<<<<< HEAD
-    /**
-     * Parses the user input string and returns the corresponding command object.
-     * 
-     * <p>This method analyzes the input string to determine the command type and
-     * extracts any necessary parameters. It performs validation on the input and
-     * throws DukiiException with descriptive error messages if the input is invalid.</p>
-     * 
-     * <p>The method handles various edge cases such as missing parameters, invalid
-     * date formats, and malformed command syntax.</p>
-     * 
-     * @param input the raw user input string
-     * @return a Command object representing the parsed command
-     * @throws DukiiException if the input cannot be parsed or is invalid
-     */
-=======
     
     private static final String TODO_PREFIX = "todo ";
     private static final String DEADLINE_PREFIX = "deadline ";
@@ -51,10 +36,10 @@ public class Parser {
     private static final String MARK_PREFIX = "mark ";
     private static final String UNMARK_PREFIX = "unmark ";
     private static final String DELETE_PREFIX = "delete ";
+    private static final String FIND_PREFIX = "find ";
     private static final String BYE_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     
->>>>>>> branch-A-CodingStandard
     public Command parse(String input) throws DukiiException {
         String trimmed = input.trim();
         
@@ -62,6 +47,10 @@ public class Parser {
             return new ByeCommand();
         } else if (trimmed.equals(LIST_COMMAND)) {
             return new ListCommand();
+        } else if (trimmed.equals("find")) {
+            throw new DukiiException("Sweetie, please tell me what you're looking for! Use: find <keyword>");
+        } else if (trimmed.startsWith(FIND_PREFIX)) {
+            return parseFindCommand(trimmed);
         } else if (trimmed.startsWith(TODO_PREFIX)) {
             return parseTodoCommand(trimmed);
         } else if (trimmed.startsWith(DEADLINE_PREFIX)) {
@@ -97,7 +86,12 @@ public class Parser {
             throw new DukiiException("Sweetie, I need both the task and when it's due! Try: deadline <description> by <time>");
         }
         
-        LocalDate dueDate = parseDate(parts[1].trim());
+        LocalDate dueDate;
+        try {
+            dueDate = LocalDate.parse(parts[1].trim());
+        } catch (DateTimeParseException e) {
+            throw new DukiiException("Honey, please use date format yyyy-MM-dd! Try: deadline <description> by <yyyy-MM-dd>");
+        }
         return new DeadlineCommand(parts[0].trim(), dueDate);
     }
     
@@ -120,25 +114,57 @@ public class Parser {
             throw new DukiiException("Oops! I need the complete event details: event <description> from <start_time> to <end_time>");
         }
         
-        LocalDate fromDate = parseDate(timeParts[0].trim());
-        LocalDate toDate = parseDate(timeParts[1].trim());
+        LocalDate fromDate;
+        LocalDate toDate;
+        try {
+            fromDate = LocalDate.parse(timeParts[0].trim());
+            toDate = LocalDate.parse(timeParts[1].trim());
+        } catch (DateTimeParseException e) {
+            throw new DukiiException("Honey, please use date format yyyy-MM-dd! Try: event <description> from <yyyy-MM-dd> to <yyyy-MM-dd>");
+        }
         
         return new EventCommand(parts[0].trim(), fromDate, toDate);
     }
     
     private Command parseMarkCommand(String input) throws DukiiException {
-        int index = parseIndex(input.substring(MARK_PREFIX.length()).trim());
+        String indexString = input.substring(MARK_PREFIX.length()).trim();
+        int index;
+        try {
+            index = Integer.parseInt(indexString);
+        } catch (NumberFormatException e) {
+            throw new DukiiException("Sweetie, I need a real number to mark the task! Please try again.");
+        }
         return new MarkCommand(index);
     }
     
     private Command parseUnmarkCommand(String input) throws DukiiException {
-        int index = parseIndex(input.substring(UNMARK_PREFIX.length()).trim());
+        String indexString = input.substring(UNMARK_PREFIX.length()).trim();
+        int index;
+        try {
+            index = Integer.parseInt(indexString);
+        } catch (NumberFormatException e) {
+            throw new DukiiException("Honey, I need a proper number to unmark the task! Please try again.");
+        }
         return new UnmarkCommand(index);
     }
     
     private Command parseDeleteCommand(String input) throws DukiiException {
-        int index = parseIndex(input.substring(DELETE_PREFIX.length()).trim());
+        String indexString = input.substring(DELETE_PREFIX.length()).trim();
+        int index;
+        try {
+            index = Integer.parseInt(indexString);
+        } catch (NumberFormatException e) {
+            throw new DukiiException("Sweetie, I need a real number to delete the task! Please try again.");
+        }
         return new DeleteCommand(index);
+    }
+    
+    private Command parseFindCommand(String input) throws DukiiException {
+        String keyword = input.substring(FIND_PREFIX.length()).trim();
+        if (keyword.isEmpty()) {
+            throw new DukiiException("Sweetie, please tell me what you're looking for! Use: find <keyword>");
+        }
+        return new FindCommand(keyword);
     }
     
     private LocalDate parseDate(String dateString) throws DukiiException {

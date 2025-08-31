@@ -17,7 +17,6 @@ import dukii.storage.Storage;
  * @version 1.0
  */
 public class ListCommand extends Command {
-<<<<<<< HEAD
     /**
      * Executes the list command by displaying all tasks in the task list.
      * 
@@ -29,9 +28,6 @@ public class ListCommand extends Command {
      * @param ui the user interface for displaying messages
      * @param storage the storage system (not used in this command)
      */
-=======
-    
->>>>>>> branch-A-CodingStandard
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.isEmpty()) {
@@ -45,7 +41,6 @@ public class ListCommand extends Command {
         }
     }
     
-<<<<<<< HEAD
     /**
      * Indicates that this command does not modify the task storage.
      * 
@@ -57,10 +52,5 @@ public class ListCommand extends Command {
     @Override 
     public boolean modifiesStorage() { 
         return false; 
-=======
-    @Override 
-    public boolean modifiesStorage() {
-        return false;
->>>>>>> branch-A-CodingStandard
     }
 }

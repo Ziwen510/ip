@@ -22,7 +22,6 @@ public class TodoCommand extends Command {
     
     private final String description;
     
-<<<<<<< HEAD
     /**
      * Constructs a new TodoCommand with the specified description.
      * 
@@ -47,12 +46,6 @@ public class TodoCommand extends Command {
      * @param storage the storage system (not used in this command)
      * @throws DukiiException if the description is empty
      */
-=======
-    public TodoCommand(String description) {
-        this.description = description;
-    }
-    
->>>>>>> branch-A-CodingStandard
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukiiException {
         if (description.isEmpty()) {

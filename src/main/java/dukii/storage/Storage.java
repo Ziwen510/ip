@@ -114,7 +114,14 @@ public class Storage {
         }
     }
 
-<<<<<<< HEAD
+    private void createFileAndDirectories(File file) throws IOException {
+        File parent = file.getParentFile();
+        if (parent != null && !parent.exists()) {
+            parent.mkdirs();
+        }
+        file.createNewFile();
+    }
+    
     /**
      * Serializes a task to its string representation for storage.
      * 
@@ -126,26 +133,6 @@ public class Storage {
      * @param task the task to serialize
      * @return a string representation of the task for storage
      */
-    private String serializeTask(Task task) {
-        String status = task.isDone() ? "1" : "0";
-        if (task instanceof ToDo) {
-            return String.join(" | ", "T", status, task.getDescription());
-        } else if (task instanceof Deadline) {
-            Deadline d = (Deadline) task;
-            return String.join(" | ", "D", status, task.getDescription(), d.getByDate().toString());
-        } else if (task instanceof Event) {
-            Event e = (Event) task;
-            return String.join(" | ", "E", status, task.getDescription(), e.getFromDate().toString(), e.getToDate().toString());
-=======
-    private void createFileAndDirectories(File file) throws IOException {
-        File parent = file.getParentFile();
-        if (parent != null && !parent.exists()) {
-            parent.mkdirs();
->>>>>>> branch-A-CodingStandard
-        }
-        file.createNewFile();
-    }
-
     private String serializeTask(Task task) {
         String status = task.isDone() ? TASK_STATUS_DONE : TASK_STATUS_PENDING;
         

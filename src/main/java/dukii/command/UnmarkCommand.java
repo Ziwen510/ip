@@ -23,7 +23,6 @@ public class UnmarkCommand extends Command {
     
     private final int index;
     
-<<<<<<< HEAD
     /**
      * Constructs a new UnmarkCommand with the specified task index.
      * 
@@ -49,12 +48,6 @@ public class UnmarkCommand extends Command {
      * @param storage the storage system (not used in this command)
      * @throws DukiiException if the task list is empty or the index is invalid
      */
-=======
-    public UnmarkCommand(int index) {
-        this.index = index;
-    }
-    
->>>>>>> branch-A-CodingStandard
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukiiException {
         if (tasks.isEmpty()) {

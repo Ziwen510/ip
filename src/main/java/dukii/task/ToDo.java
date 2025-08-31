@@ -14,7 +14,6 @@ package dukii.task;
  * @version 1.0
  */
 public class ToDo extends Task {
-<<<<<<< HEAD
     /**
      * Constructs a new ToDo task with the specified description.
      * 
@@ -22,9 +21,6 @@ public class ToDo extends Task {
      * 
      * @param description the description of the todo task
      */
-=======
-    
->>>>>>> branch-A-CodingStandard
     public ToDo(String description) {
         super(description);
     }

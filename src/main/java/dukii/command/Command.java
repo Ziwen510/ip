@@ -20,7 +20,6 @@ import dukii.exception.DukiiException;
  * @version 1.0
  */
 public abstract class Command {
-<<<<<<< HEAD
     /**
      * Executes the command with the given task list, user interface, and storage.
      * 
@@ -43,7 +42,9 @@ public abstract class Command {
      * 
      * @return true if the command should exit the application, false otherwise
      */
-    public boolean isExit() { return false; }
+    public boolean isExit() {
+        return false;
+    }
     
     /**
      * Indicates whether this command modifies the task storage.
@@ -54,17 +55,7 @@ public abstract class Command {
      * 
      * @return true if the command modifies storage, false otherwise
      */
-    public boolean modifiesStorage() { return true; }
-=======
-    
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukiiException;
-    
-    public boolean isExit() {
-        return false;
-    }
-    
     public boolean modifiesStorage() {
         return true;
     }
->>>>>>> branch-A-CodingStandard
 }
