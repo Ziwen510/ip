@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.exception.DukiiException;
+import duke.task.Task;
+
 public class DeleteCommand extends Command {
     private final int index;
     public DeleteCommand(int index) { this.index = index; }
@@ -16,5 +24,3 @@ public class DeleteCommand extends Command {
         ui.showMessage("Now you have " + tasks.asList().size() + " task(s) in the list.");
     }
 }
-
-

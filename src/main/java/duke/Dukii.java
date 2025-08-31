@@ -1,6 +1,15 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.IOException;
+import duke.ui.Ui;
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.storage.Storage;
+import duke.parser.Parser;
+import duke.command.Command;
+import duke.exception.DukiiException;
 
 public class Dukii {
     private static ArrayList<Task> tasks = new ArrayList<>();
@@ -47,3 +56,5 @@ public class Dukii {
         }
     }
 }
+
+

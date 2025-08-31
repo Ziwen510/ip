@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.exception.DukiiException;
+
 public class MarkCommand extends Command {
     private final int index;
     public MarkCommand(int index) { this.index = index; }
@@ -19,5 +27,3 @@ public class MarkCommand extends Command {
         }
     }
 }
-
-

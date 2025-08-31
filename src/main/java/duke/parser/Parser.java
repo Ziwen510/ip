@@ -1,5 +1,9 @@
+package duke.parser;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import duke.exception.DukiiException;
+import duke.command.*;
 
 public class Parser {
     public Command parse(String input) throws DukiiException {
@@ -78,3 +82,5 @@ public class Parser {
         throw new DukiiException("Oh honey, I'm not sure what you mean by that! Could you try one of my commands?");
     }
 }
+
+

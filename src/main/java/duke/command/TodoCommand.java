@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.exception.DukiiException;
+
 public class TodoCommand extends Command {
     private final String description;
     public TodoCommand(String description) { this.description = description; }
@@ -12,5 +20,3 @@ public class TodoCommand extends Command {
         ui.showMessage("Now you have " + tasks.asList().size() + " task(s) in the list.");
     }
 }
-
-

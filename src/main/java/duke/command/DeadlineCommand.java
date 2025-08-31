@@ -1,4 +1,10 @@
+package duke.command;
+
 import java.time.LocalDate;
+import duke.task.TaskList;
+import duke.task.Deadline;
+import duke.ui.Ui;
+import duke.storage.Storage;
 
 public class DeadlineCommand extends Command {
     private final String description;
@@ -15,5 +21,3 @@ public class DeadlineCommand extends Command {
         ui.showMessage("Now you have " + tasks.asList().size() + " task(s) in the list.");
     }
 }
-
-

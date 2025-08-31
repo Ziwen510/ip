@@ -1,4 +1,10 @@
+package duke.command;
+
 import java.time.LocalDate;
+import duke.task.TaskList;
+import duke.task.Event;
+import duke.ui.Ui;
+import duke.storage.Storage;
 
 public class EventCommand extends Command {
     private final String description;
@@ -17,5 +23,3 @@ public class EventCommand extends Command {
         ui.showMessage("Now you have " + tasks.asList().size() + " task(s) in the list.");
     }
 }
-
-
