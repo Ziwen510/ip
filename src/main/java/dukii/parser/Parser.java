@@ -5,7 +5,43 @@ import java.time.format.DateTimeParseException;
 import dukii.exception.DukiiException;
 import dukii.command.*;
 
+/**
+ * Parser class responsible for interpreting user input and converting it into
+ * executable commands.
+ * 
+ * <p>The parser handles various command formats and validates input before
+ * creating the appropriate command objects. It supports the following commands:</p>
+ * <ul>
+ *   <li>bye - exits the application</li>
+ *   <li>list - displays all tasks</li>
+ *   <li>todo &lt;description&gt; - creates a new todo task</li>
+ *   <li>deadline &lt;description&gt; by &lt;date&gt; - creates a deadline task</li>
+ *   <li>event &lt;description&gt; from &lt;start_date&gt; to &lt;end_date&gt; - creates an event task</li>
+ *   <li>mark &lt;index&gt; - marks a task as done</li>
+ *   <li>unmark &lt;index&gt; - marks a task as pending</li>
+ *   <li>delete &lt;index&gt; - removes a task</li>
+ * </ul>
+ * 
+ * <p>Date formats should be in yyyy-MM-dd format (e.g., 2025-08-25).</p>
+ * 
+ * @author Wang Ziwen & AIs
+ * @version 1.0
+ */
 public class Parser {
+    /**
+     * Parses the user input string and returns the corresponding command object.
+     * 
+     * <p>This method analyzes the input string to determine the command type and
+     * extracts any necessary parameters. It performs validation on the input and
+     * throws DukiiException with descriptive error messages if the input is invalid.</p>
+     * 
+     * <p>The method handles various edge cases such as missing parameters, invalid
+     * date formats, and malformed command syntax.</p>
+     * 
+     * @param input the raw user input string
+     * @return a Command object representing the parsed command
+     * @throws DukiiException if the input cannot be parsed or is invalid
+     */
     public Command parse(String input) throws DukiiException {
         String trimmed = input.trim();
         if (trimmed.equals("bye")) {
