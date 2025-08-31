@@ -30,10 +30,11 @@ import dukii.exception.DukiiException;
  * @version 1.0
  */
 public class Dukii {
-    private static ArrayList<Task> tasks = new ArrayList<>();
-    private static TaskList taskList = new TaskList(tasks);
-    private static Storage storage = new Storage("./data/dukii.txt");
-    private static Ui ui = new Ui();
+    private static final String STORAGE_FILE_PATH = "./data/dukii.txt";
+    private static final ArrayList<Task> TASKS = new ArrayList<>();
+    private static final TaskList TASK_LIST = new TaskList(TASKS);
+    private static final Storage STORAGE = new Storage(STORAGE_FILE_PATH);
+    private static final Ui UI = new Ui();
     
     /**
      * The main entry point of the Dukii application.
@@ -45,33 +46,38 @@ public class Dukii {
      * @param args command line arguments (not used)
      */
     public static void main(String[] args) {
-        ui.showWelcome();
+        UI.showWelcome();
         try {
-            tasks = storage.load();
-            taskList = new TaskList(tasks);
+            ArrayList<Task> loadedTasks = STORAGE.load();
+            TASKS.clear();
+            TASKS.addAll(loadedTasks);
         } catch (IOException e) {
-            ui.showMessage("Oh no my sweety, I couldn't load your tasks. Starting fresh.");
+            UI.showMessage("Oh no my sweety, I couldn't load your tasks. Starting fresh.");
         }
 
         Parser parser = new Parser();
         Scanner scanner = new Scanner(System.in);
+        
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             try {
                 Command command = parser.parse(input);
-                command.execute(taskList, ui, storage);
+                command.execute(TASK_LIST, UI, STORAGE);
+                
                 if (command.modifiesStorage()) {
                     saveSafely();
                 }
+                
                 if (command.isExit()) {
                     break;
                 }
             } catch (DukiiException e) {
-                ui.showMessage("Oopsie! " + e.getMessage());
+                UI.showMessage("Oopsie! " + e.getMessage());
             } catch (Exception e) {
-                ui.showMessage("Oh no my sweety, something unexpected happened. Please try again.");
+                UI.showMessage("Oh no my sweety, something unexpected happened. Please try again.");
             }
         }
+        
         scanner.close();
     }
     
@@ -84,9 +90,9 @@ public class Dukii {
      */
     private static void saveSafely() {
         try {
-            storage.save(taskList.asList());
+            STORAGE.save(TASK_LIST.asList());
         } catch (IOException e) {
-            ui.showMessage("Oh no my sweety, I couldn't save your tasks. Please try again.");
+            UI.showMessage("Oh no my sweety, I couldn't save your tasks. Please try again.");
         }
     }
 }

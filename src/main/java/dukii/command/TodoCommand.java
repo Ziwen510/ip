@@ -19,8 +19,10 @@ import dukii.exception.DukiiException;
  * @version 1.0
  */
 public class TodoCommand extends Command {
+    
     private final String description;
     
+<<<<<<< HEAD
     /**
      * Constructs a new TodoCommand with the specified description.
      * 
@@ -45,14 +47,21 @@ public class TodoCommand extends Command {
      * @param storage the storage system (not used in this command)
      * @throws DukiiException if the description is empty
      */
+=======
+    public TodoCommand(String description) {
+        this.description = description;
+    }
+    
+>>>>>>> branch-A-CodingStandard
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukiiException {
         if (description.isEmpty()) {
             throw new DukiiException("What would you like me to add to your list, sweety?");
         }
-        tasks.asList().add(new ToDo(description));
+        
+        tasks.addTask(new ToDo(description));
         ui.showMessage("Got it. I've added this todo:");
-        System.out.println("  " + tasks.asList().get(tasks.asList().size() - 1));
-        ui.showMessage("Now you have " + tasks.asList().size() + " task(s) in the list.");
+        System.out.println("  " + tasks.asList().get(tasks.getSize() - 1));
+        ui.showMessage("Now you have " + tasks.getSize() + " task(s) in the list.");
     }
 }

@@ -29,10 +29,12 @@ public class ByeCommand extends Command {
      * @param ui the user interface for displaying the farewell message
      * @param storage the storage system (not used in this command)
      */
+    
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showMessage("Bye~ Have a good day!");
     }
+    
     
     /**
      * Indicates that this command should terminate the application.
@@ -43,9 +45,13 @@ public class ByeCommand extends Command {
      * @return true to indicate that the application should exit
      */
     @Override 
-    public boolean isExit() { 
-        return true; 
+    
+    public boolean isExit() {
+        
+        return true;
+    
     }
+    
     
     /**
      * Indicates that this command does not modify the task storage.
@@ -56,7 +62,10 @@ public class ByeCommand extends Command {
      * @return false since this command doesn't modify storage
      */
     @Override 
-    public boolean modifiesStorage() { 
-        return false; 
+    
+    public boolean modifiesStorage() {
+        
+        return false;
+    
     }
 }

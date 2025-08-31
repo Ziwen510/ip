@@ -15,6 +15,7 @@ package dukii.task;
  * @version 1.0
  */
 public abstract class Task {
+    
     protected String description;
     protected boolean isDone;
     
@@ -36,7 +37,7 @@ public abstract class Task {
      * @return the task description
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -45,7 +46,7 @@ public abstract class Task {
      * <p>This method changes the completion status of the task to done.</p>
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
     
     /**
@@ -54,7 +55,7 @@ public abstract class Task {
      * <p>This method changes the completion status of the task to pending.</p>
      */
     public void markAsPending() {
-        this.isDone = false;
+        isDone = false;
     }
     
     /**
@@ -63,7 +64,7 @@ public abstract class Task {
      * @return true if the task is done, false if it is pending
      */
     public boolean isDone() {
-        return this.isDone;
+        return isDone;
     }
     
     /**

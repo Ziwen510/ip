@@ -18,8 +18,11 @@ import java.time.format.DateTimeFormatter;
  * @version 1.0
  */
 public class Event extends Task {
-    private LocalDate fromDate;
-    private LocalDate toDate;
+    
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
+    
+    private final LocalDate fromDate;
+    private final LocalDate toDate;
 
     /**
      * Constructs a new Event task with the specified description and date range.
@@ -42,7 +45,7 @@ public class Event extends Task {
      * @return the LocalDate representing when the event starts
      */
     public LocalDate getFromDate() {
-        return this.fromDate;
+        return fromDate;
     }
 
     /**
@@ -51,7 +54,7 @@ public class Event extends Task {
      * @return the LocalDate representing when the event ends
      */
     public LocalDate getToDate() {
-        return this.toDate;
+        return toDate;
     }
 
     /**
@@ -78,9 +81,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMM d yyyy");
-        String fromDisplay = fromDate.format(fmt);
-        String toDisplay = toDate.format(fmt);
-        return "[" + getTaskType() + "][" + (isDone ? "X" : " ") + "] " + description + " (from: " + fromDisplay + " to: " + toDisplay + ")";
+        String fromDisplay = fromDate.format(DATE_FORMATTER);
+        String toDisplay = toDate.format(DATE_FORMATTER);
+        return "[" + getTaskType() + "][" + (isDone ? "X" : " ") + "] " + description + 
+               " (from: " + fromDisplay + " to: " + toDisplay + ")";
     }
 }

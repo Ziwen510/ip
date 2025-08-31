@@ -15,6 +15,7 @@ package dukii.exception;
  * @version 1.0
  */
 public class DukiiException extends Exception {
+<<<<<<< HEAD
     /**
      * Constructs a new DukiiException with the specified detail message.
      * 
@@ -23,6 +24,9 @@ public class DukiiException extends Exception {
      * 
      * @param message the detail message explaining the error
      */
+=======
+    
+>>>>>>> branch-A-CodingStandard
     public DukiiException(String message) {
         super(message);
     }

@@ -15,6 +15,7 @@ package dukii.ui;
  * @version 1.0
  */
 public class Ui {
+<<<<<<< HEAD
     /**
      * Displays a message to the user.
      * 
@@ -24,6 +25,9 @@ public class Ui {
      * 
      * @param message the message to display to the user
      */
+=======
+    
+>>>>>>> branch-A-CodingStandard
     public void showMessage(String message) {
         System.out.println(message);
     }

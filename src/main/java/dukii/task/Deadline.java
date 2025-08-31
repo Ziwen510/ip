@@ -18,7 +18,10 @@ import java.time.format.DateTimeFormatter;
  * @version 1.0
  */
 public class Deadline extends Task {
-    private LocalDate byDate;
+    
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
+    
+    private final LocalDate byDate;
 
     /**
      * Constructs a new Deadline task with the specified description and due date.
@@ -39,7 +42,7 @@ public class Deadline extends Task {
      * @return the LocalDate representing when the task is due
      */
     public LocalDate getByDate() {
-        return this.byDate;
+        return byDate;
     }
 
     /**
@@ -66,7 +69,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String display = byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String display = byDate.format(DATE_FORMATTER);
         return "[" + getTaskType() + "][" + (isDone ? "X" : " ") + "] " + description + " (by: " + display + ")";
     }
 }
