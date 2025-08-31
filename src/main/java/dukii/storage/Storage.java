@@ -1,4 +1,4 @@
-package duke.storage;
+package dukii.storage;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
-import duke.task.*;
+import dukii.task.*;
 
 public class Storage {
     private final String filePath;

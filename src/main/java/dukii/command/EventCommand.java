@@ -1,10 +1,10 @@
-package duke.command;
+package dukii.command;
 
 import java.time.LocalDate;
-import duke.task.TaskList;
-import duke.task.Event;
-import duke.ui.Ui;
-import duke.storage.Storage;
+import dukii.task.TaskList;
+import dukii.task.Event;
+import dukii.ui.Ui;
+import dukii.storage.Storage;
 
 public class EventCommand extends Command {
     private final String description;

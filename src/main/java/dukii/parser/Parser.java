@@ -1,9 +1,9 @@
-package duke.parser;
+package dukii.parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import duke.exception.DukiiException;
-import duke.command.*;
+import dukii.exception.DukiiException;
+import dukii.command.*;
 
 public class Parser {
     public Command parse(String input) throws DukiiException {

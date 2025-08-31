@@ -1,8 +1,8 @@
-package duke.command;
+package dukii.command;
 
-import duke.task.TaskList;
-import duke.ui.Ui;
-import duke.storage.Storage;
+import dukii.task.TaskList;
+import dukii.ui.Ui;
+import dukii.storage.Storage;
 
 public class ByeCommand extends Command {
     @Override

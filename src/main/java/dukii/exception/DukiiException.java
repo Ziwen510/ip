@@ -1,4 +1,4 @@
-package duke.exception;
+package dukii.exception;
 
 public class DukiiException extends Exception {
     public DukiiException(String message) {

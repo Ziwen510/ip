@@ -1,9 +1,9 @@
-package duke.command;
+package dukii.command;
 
-import duke.task.TaskList;
-import duke.ui.Ui;
-import duke.storage.Storage;
-import duke.exception.DukiiException;
+import dukii.task.TaskList;
+import dukii.ui.Ui;
+import dukii.storage.Storage;
+import dukii.exception.DukiiException;
 
 public abstract class Command {
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukiiException;
