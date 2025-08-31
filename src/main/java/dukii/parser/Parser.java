@@ -12,6 +12,15 @@ public class Parser {
             return new ByeCommand();
         } else if (trimmed.equals("list")) {
             return new ListCommand();
+        } else if (trimmed.startsWith("find")) {
+            if (trimmed.equals("find")) {
+                throw new DukiiException("Sweetie, please tell me what you're looking for! Use: find <keyword>");
+            }
+            String keyword = trimmed.substring(4).trim();
+            if (keyword.isEmpty()) {
+                throw new DukiiException("Sweetie, please tell me what you're looking for! Use: find <keyword>");
+            }
+            return new FindCommand(keyword);
         } else if (trimmed.startsWith("todo ")) {
             String desc = trimmed.substring(5).trim();
             return new TodoCommand(desc);
@@ -75,7 +84,7 @@ public class Parser {
             try {
                 idx = Integer.parseInt(trimmed.substring(7).trim());
             } catch (NumberFormatException e) {
-                throw new DukiiException("Honey, I need a real number to delete the task! Please try again.");
+                throw new DukiiException("Sweetie, I need a real number to delete the task! Please try again.");
             }
             return new DeleteCommand(idx);
         }
