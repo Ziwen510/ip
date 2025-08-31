@@ -1,22 +1,26 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    private String by;
-    
-    public Deadline(String description, String by) {
+    private LocalDate byDate;
+
+    public Deadline(String description, LocalDate byDate) {
         super(description);
-        this.by = by;
+        this.byDate = byDate;
     }
-    
-    public String getBy() {
-        return this.by;
+
+    public LocalDate getByDate() {
+        return this.byDate;
     }
 
     @Override
     public String getTaskType() {
         return "D";
     }
-    
+
     @Override
     public String toString() {
-        return "[" + getTaskType() + "][" + (isDone ? "X" : " ") + "] " + description + " (by: " + by + ")";
+        String display = byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "[" + getTaskType() + "][" + (isDone ? "X" : " ") + "] " + description + " (by: " + display + ")";
     }
 }

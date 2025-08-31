@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Dukii {
     private static ArrayList<Task> tasks = new ArrayList<>();
@@ -101,7 +103,15 @@ public class Dukii {
         if (timeParts.length != 2 || timeParts[0].isEmpty() || timeParts[1].isEmpty()) {
             throw new DukiiException("Oops! I need the complete event details: event <description> from <start_time> to <end_time>");
         }
-        tasks.add(new Event(parts[0].trim(), timeParts[0].trim(), timeParts[1].trim()));
+        String from = timeParts[0].trim();
+        String to = timeParts[1].trim();
+        try {
+            LocalDate fromDate = LocalDate.parse(from);
+            LocalDate toDate = LocalDate.parse(to);
+            tasks.add(new Event(parts[0].trim(), fromDate, toDate));
+        } catch (DateTimeParseException e) {
+            throw new DukiiException("Honey, please use date format yyyy-MM-dd! Try: event <description> from <yyyy-MM-dd> to <yyyy-MM-dd>");
+        }
         System.out.println("Got it. I've added this event:");
         System.out.println("  " + tasks.get(tasks.size() - 1));
         System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
@@ -115,7 +125,13 @@ public class Dukii {
         if (parts.length != 2 || parts[0].isEmpty() || parts[1].isEmpty()) {
             throw new DukiiException("Sweetie, I need both the task and when it's due! Try: deadline <description> by <time>");
         }
-        tasks.add(new Deadline(parts[0].trim(), parts[1].trim()));
+        String by = parts[1].trim();
+        try {
+            LocalDate byDate = LocalDate.parse(by);
+            tasks.add(new Deadline(parts[0].trim(), byDate));
+        } catch (DateTimeParseException e) {
+            throw new DukiiException("Honey, please use date format yyyy-MM-dd! Try: deadline <description> by <yyyy-MM-dd>");
+        }
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + tasks.get(tasks.size() - 1));
         System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
