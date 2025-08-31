@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 public class Storage {
     private final String filePath;
@@ -59,10 +60,10 @@ public class Storage {
             return String.join(" | ", "T", status, task.getDescription());
         } else if (task instanceof Deadline) {
             Deadline d = (Deadline) task;
-            return String.join(" | ", "D", status, task.getDescription(), d.getBy());
+            return String.join(" | ", "D", status, task.getDescription(), d.getByDate().toString());
         } else if (task instanceof Event) {
             Event e = (Event) task;
-            return String.join(" | ", "E", status, task.getDescription(), e.getFrom(), e.getTo());
+            return String.join(" | ", "E", status, task.getDescription(), e.getFromDate().toString(), e.getToDate().toString());
         }
         return "";
     }
@@ -79,9 +80,17 @@ public class Storage {
         if ("T".equals(type)) {
             task = new ToDo(description);
         } else if ("D".equals(type) && parts.length >= 4) {
-            task = new Deadline(description, parts[3]);
+            try {
+                task = new Deadline(description, LocalDate.parse(parts[3]));
+            } catch (Exception ignored) {
+                return null;
+            }
         } else if ("E".equals(type) && parts.length >= 5) {
-            task = new Event(description, parts[3], parts[4]);
+            try {
+                task = new Event(description, LocalDate.parse(parts[3]), LocalDate.parse(parts[4]));
+            } catch (Exception ignored) {
+                return null;
+            }
         }
         if (task != null && isDone) {
             task.markAsDone();
