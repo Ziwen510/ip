@@ -10,13 +10,48 @@ import java.util.List;
 import java.time.LocalDate;
 import dukii.task.*;
 
+/**
+ * Storage class responsible for persisting and loading task data to/from the file system.
+ * 
+ * <p>This class handles the serialization and deserialization of tasks to ensure
+ * data persistence across application sessions. It supports three task types:
+ * todos, deadlines, and events, each with their own serialization format.</p>
+ * 
+ * <p>The storage format uses pipe-separated values with the following structure:</p>
+ * <ul>
+ *   <li>Todo: T | status | description</li>
+ *   <li>Deadline: D | status | description | due_date</li>
+ *   <li>Event: E | status | description | start_date | end_date</li>
+ * </ul>
+ * 
+ * <p>Status is represented as "0" for pending and "1" for completed tasks.</p>
+ * 
+ * @author Wang Ziwen & AIs
+ * @version 1.0
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs a new Storage instance with the specified file path.
+     * 
+     * @param filePath the path to the file where tasks will be stored
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from the storage file.
+     * 
+     * <p>This method reads the storage file and reconstructs Task objects from
+     * the stored data. If the file doesn't exist, it creates a new empty file
+     * and returns an empty task list. If the parent directory doesn't exist,
+     * it creates the necessary directory structure.</p>
+     * 
+     * @return an ArrayList containing all loaded tasks
+     * @throws IOException if an error occurs during file operations
+     */
     public ArrayList<Task> load() throws IOException {
         Path path = Path.of(filePath);
         File file = path.toFile();
@@ -42,6 +77,17 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the given task list to the storage file.
+     * 
+     * <p>This method serializes each task to its string representation and
+     * writes it to the storage file. If the parent directory doesn't exist,
+     * it creates the necessary directory structure. The file is overwritten
+     * with the new task data.</p>
+     * 
+     * @param tasks the list of tasks to save
+     * @throws IOException if an error occurs during file operations
+     */
     public void save(List<Task> tasks) throws IOException {
         Path path = Path.of(filePath);
         File file = path.toFile();
@@ -57,6 +103,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Serializes a task to its string representation for storage.
+     * 
+     * <p>This method converts a Task object to a pipe-separated string format
+     * suitable for persistent storage. The format varies by task type and
+     * includes the task type identifier, completion status, description,
+     * and any relevant date information.</p>
+     * 
+     * @param task the task to serialize
+     * @return a string representation of the task for storage
+     */
     private String serializeTask(Task task) {
         String status = task.isDone() ? "1" : "0";
         if (task instanceof ToDo) {
@@ -71,6 +128,17 @@ public class Storage {
         return "";
     }
 
+    /**
+     * Parses a stored task string and reconstructs the corresponding Task object.
+     * 
+     * <p>This method reads a line from the storage file and converts it back
+     * to a Task object. It handles the different formats for each task type
+     * and validates the data during parsing. If parsing fails for any reason,
+     * the method returns null to skip that line.</p>
+     * 
+     * @param line the stored string representation of a task
+     * @return the reconstructed Task object, or null if parsing fails
+     */
     private Task parseTask(String line) {
         String[] parts = line.split("\\s*\\|\\s*");
         if (parts.length < 3) {
