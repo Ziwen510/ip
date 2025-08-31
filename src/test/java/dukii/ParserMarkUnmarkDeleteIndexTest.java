@@ -25,7 +25,7 @@ public class ParserMarkUnmarkDeleteIndexTest {
     void delete_rejectsNonNumeric() {
         Parser p = new Parser();
         DukiiException ex = assertThrows(DukiiException.class, () -> p.parse("delete one"));
-        assertEquals("Honey, I need a real number to delete the task! Please try again.", ex.getMessage());
+        assertEquals("Sweetie, I need a real number to delete the task! Please try again.", ex.getMessage());
     }
 }
 
