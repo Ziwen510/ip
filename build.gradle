@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id 'checkstyle'
 }
 
 repositories {
@@ -40,14 +41,8 @@ run{
     standardInput = System.in
 }
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
-}
-
-test {
-    useJUnitPlatform()
+checkstyle {
+    toolVersion = '9.3'
+    ignoreFailures = false
+    maxWarnings = 0
 }

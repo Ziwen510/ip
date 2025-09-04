@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+        "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+        "https://checkstyle.org/dtds/suppressions_1_2.dtd">
+
+<!--
+    SuppressionFilter can suppress any audit event.
+
+    Suppression is done via one of the following approaches:
+    1. suppress a specific audit event
+       - by checks attribute of a suppress tag
+       - by message attribute of a suppress tag
+       - by checks and message attribute of a suppress tag
+    2. suppress all audit events for a file
+       - by files attribute of a suppress tag
+       - by files and checks attribute of a suppress tag
+    3. suppress all audit events in a common module
+       - by module attribute of a suppress tag
+
+    SuppressionFilter is optional, if it is not configured, then
+    no suppressions are applied.
+
+    If you want to suppress Checkstyle violations, you can use one of the following approaches.
+    Each of the approaches has its own pros and cons.
+
+    Note: suppress and suppress-xpath are independent of each other, it is possible to
+    use both at the same time. All suppress and suppress-xpath elements are handled
+    together as a set, regardless of whether they are defined in the same file or
+    in the separate files.
+
+    Example of a suppress tag:
+    <suppress files="[a-zA-Z]*Test\.java" checks="MagicNumber"/>
+
+    This suppresses Magic Number violations in all files that match the
+    regular expression [a-zA-Z]*Test\.java.
+
+    Example of a suppress-xpath tag:
+    <suppress-xpath checks="DescendantToken"
+                    query="//METHOD_DEF[./IDENT[@text='start']]//ASSIGN[@text='=']"/>
+
+    This suppresses DescendantToken violations in all files for any assignment
+    tokens that are descendants of a method with the name "start".
+
+    More information can be found at:
+    https://checkstyle.org/config_filters.html#SuppressionFilter
+    https://checkstyle.org/config_filters.html#SuppressionXpathFilter
+-->
+
+<suppressions>
+    <!-- Suppress all violations in test files -->
+    <suppress files=".*Test\.java" checks=".*"/>
+    
+    <!-- Suppress specific violations that are commonly acceptable in this project -->
+    <suppress files=".*" checks="MagicNumber"/>
+    <suppress files=".*" checks="MissingJavadocMethod"/>
+    <suppress files=".*" checks="MissingJavadocType"/>
+    <suppress files=".*" checks="MissingJavadocVariable"/>
+</suppressions>
