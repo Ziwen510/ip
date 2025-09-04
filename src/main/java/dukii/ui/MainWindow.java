@@ -34,11 +34,18 @@ public class MainWindow extends AnchorPane {
     private final Parser parser = new Parser();
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dukii.jpeg"));
+    private final Image dukiiImage = new Image(this.getClass().getResourceAsStream("/images/dukii.jpeg"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        ui.showWelcome();
+        String welcome = ui.drainMessages();
+        if (!welcome.isEmpty()) {
+            dialogContainer.getChildren().add(
+                    DialogBox.getDukiiDialog(welcome, dukiiImage)
+            );
+        }
     }
 
     // No external injection required; GUI is wired directly to Dukii components.
@@ -60,7 +67,7 @@ public class MainWindow extends AnchorPane {
                 response = ui.drainMessages();
                 dialogContainer.getChildren().addAll(
                         DialogBox.getUserDialog(input, userImage),
-                        DialogBox.getDukeDialog(response, dukeImage)
+                        DialogBox.getDukiiDialog(response, dukiiImage)
                 );
                 userInput.clear();
                 // optional: close window
@@ -77,7 +84,7 @@ public class MainWindow extends AnchorPane {
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukiiDialog(response, dukiiImage)
         );
         userInput.clear();
     }
