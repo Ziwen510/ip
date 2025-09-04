@@ -43,6 +43,7 @@ run{
 
 checkstyle {
     toolVersion = '9.3'
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
     ignoreFailures = false
     maxWarnings = 0
 }

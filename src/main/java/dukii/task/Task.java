@@ -16,8 +16,8 @@ package dukii.task;
  */
 public abstract class Task {
     
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
     
     /**
      * Constructs a new task with the given description.

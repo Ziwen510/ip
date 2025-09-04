@@ -8,7 +8,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
-import dukii.task.*;
+import dukii.task.Deadline;
+import dukii.task.Event;
+import dukii.task.Task;
+import dukii.task.ToDo;
 
 /**
  * Storage class responsible for persisting and loading task data to/from the file system.
@@ -37,6 +40,12 @@ public class Storage {
     private static final String TASK_TYPE_EVENT = "E";
     private static final String TASK_STATUS_DONE = "1";
     private static final String TASK_STATUS_PENDING = "0";
+    private static final int TODO_MIN_PARTS = 3;
+    private static final int DEADLINE_MIN_PARTS = 4;
+    private static final int EVENT_MIN_PARTS = 5;
+    private static final int DEADLINE_DATE_INDEX = 3;
+    private static final int EVENT_FROM_DATE_INDEX = 3;
+    private static final int EVENT_TO_DATE_INDEX = 4;
     
     private final String filePath;
 
@@ -45,7 +54,7 @@ public class Storage {
      * 
      * @param filePath the path to the file where tasks will be stored
      */
-    public Storage(String filePath) {
+    public Storage(final String filePath) {
         this.filePath = filePath;
     }
 
@@ -61,16 +70,16 @@ public class Storage {
      * @throws IOException if an error occurs during file operations
      */
     public ArrayList<Task> load() throws IOException {
-        Path path = Path.of(filePath);
-        File file = path.toFile();
+        final Path path = Path.of(filePath);
+        final File file = path.toFile();
         
         if (!file.exists()) {
             createFileAndDirectories(file);
             return new ArrayList<>();
         }
         
-        List<String> lines = Files.readAllLines(path);
-        ArrayList<Task> tasks = new ArrayList<>();
+        final List<String> lines = Files.readAllLines(path);
+        final ArrayList<Task> tasks = new ArrayList<>();
         
         for (String line : lines) {
             if (line == null || line.trim().isEmpty()) {
@@ -97,10 +106,10 @@ public class Storage {
      * @param tasks the list of tasks to save
      * @throws IOException if an error occurs during file operations
      */
-    public void save(List<Task> tasks) throws IOException {
-        Path path = Path.of(filePath);
-        File file = path.toFile();
-        File parent = file.getParentFile();
+    public void save(final List<Task> tasks) throws IOException {
+        final Path path = Path.of(filePath);
+        final File file = path.toFile();
+        final File parent = file.getParentFile();
         
         if (parent != null && !parent.exists()) {
             parent.mkdirs();
@@ -114,8 +123,8 @@ public class Storage {
         }
     }
 
-    private void createFileAndDirectories(File file) throws IOException {
-        File parent = file.getParentFile();
+    private void createFileAndDirectories(final File file) throws IOException {
+        final File parent = file.getParentFile();
         if (parent != null && !parent.exists()) {
             parent.mkdirs();
         }
@@ -133,17 +142,17 @@ public class Storage {
      * @param task the task to serialize
      * @return a string representation of the task for storage
      */
-    private String serializeTask(Task task) {
+    private String serializeTask(final Task task) {
         String status = task.isDone() ? TASK_STATUS_DONE : TASK_STATUS_PENDING;
         
         if (task instanceof ToDo) {
             return String.join(TASK_SEPARATOR, TASK_TYPE_TODO, status, task.getDescription());
         } else if (task instanceof Deadline) {
-            Deadline deadline = (Deadline) task;
+            final Deadline deadline = (Deadline) task;
             return String.join(TASK_SEPARATOR, TASK_TYPE_DEADLINE, status, 
                              task.getDescription(), deadline.getByDate().toString());
         } else if (task instanceof Event) {
-            Event event = (Event) task;
+            final Event event = (Event) task;
             return String.join(TASK_SEPARATOR, TASK_TYPE_EVENT, status, 
                              task.getDescription(), event.getFromDate().toString(), 
                              event.getToDate().toString());
@@ -163,28 +172,28 @@ public class Storage {
      * @param line the stored string representation of a task
      * @return the reconstructed Task object, or null if parsing fails
      */
-    private Task parseTask(String line) {
+    private Task parseTask(final String line) {
         String[] parts = line.split("\\s*\\|\\s*");
-        if (parts.length < 3) {
+        if (parts.length < TODO_MIN_PARTS) {
             return null;
         }
         
-        String type = parts[0];
-        boolean isDone = TASK_STATUS_DONE.equals(parts[1]);
-        String description = parts[2];
+        final String type = parts[0];
+        final boolean isDone = TASK_STATUS_DONE.equals(parts[1]);
+        final String description = parts[2];
         Task task = null;
         
         if (TASK_TYPE_TODO.equals(type)) {
             task = new ToDo(description);
-        } else if (TASK_TYPE_DEADLINE.equals(type) && parts.length >= 4) {
+        } else if (TASK_TYPE_DEADLINE.equals(type) && parts.length >= DEADLINE_MIN_PARTS) {
             try {
-                task = new Deadline(description, LocalDate.parse(parts[3]));
+                task = new Deadline(description, LocalDate.parse(parts[DEADLINE_DATE_INDEX]));
             } catch (Exception ignored) {
                 return null;
             }
-        } else if (TASK_TYPE_EVENT.equals(type) && parts.length >= 5) {
+        } else if (TASK_TYPE_EVENT.equals(type) && parts.length >= EVENT_MIN_PARTS) {
             try {
-                task = new Event(description, LocalDate.parse(parts[3]), LocalDate.parse(parts[4]));
+                task = new Event(description, LocalDate.parse(parts[EVENT_FROM_DATE_INDEX]), LocalDate.parse(parts[EVENT_TO_DATE_INDEX]));
             } catch (Exception ignored) {
                 return null;
             }

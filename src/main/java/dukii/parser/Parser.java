@@ -3,7 +3,16 @@ package dukii.parser;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import dukii.exception.DukiiException;
-import dukii.command.*;
+import dukii.command.ByeCommand;
+import dukii.command.Command;
+import dukii.command.DeadlineCommand;
+import dukii.command.DeleteCommand;
+import dukii.command.EventCommand;
+import dukii.command.FindCommand;
+import dukii.command.ListCommand;
+import dukii.command.MarkCommand;
+import dukii.command.TodoCommand;
+import dukii.command.UnmarkCommand;
 
 /**
  * Parser class responsible for interpreting user input and converting it into
@@ -40,7 +49,7 @@ public class Parser {
     private static final String BYE_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     
-    public Command parse(String input) throws DukiiException {
+    public Command parse(final String input) throws DukiiException {
         String trimmed = input.trim();
         
         if (trimmed.equals(BYE_COMMAND)) {
@@ -68,7 +77,7 @@ public class Parser {
         throw new DukiiException("Oh honey, I'm not sure what you mean by that! Could you try one of my commands?");
     }
     
-    private Command parseTodoCommand(String input) throws DukiiException {
+    private Command parseTodoCommand(final String input) throws DukiiException {
         String description = input.substring(TODO_PREFIX.length()).trim();
         if (description.isEmpty()) {
             throw new DukiiException("What would you like me to add to your list, sweety?");
@@ -76,7 +85,7 @@ public class Parser {
         return new TodoCommand(description);
     }
     
-    private Command parseDeadlineCommand(String input) throws DukiiException {
+    private Command parseDeadlineCommand(final String input) throws DukiiException {
         if (!input.contains(" by ")) {
             throw new DukiiException("Honey, I need to know when this is due! Please use: deadline <description> by <time>");
         }
@@ -95,7 +104,7 @@ public class Parser {
         return new DeadlineCommand(parts[0].trim(), dueDate);
     }
     
-    private Command parseEventCommand(String input) throws DukiiException {
+    private Command parseEventCommand(final String input) throws DukiiException {
         if (!input.contains(" from ")) {
             throw new DukiiException("Sweetie, for events I need to know when they start and end! Try: event <description> from <start_time> to <end_time>");
         }
@@ -126,7 +135,7 @@ public class Parser {
         return new EventCommand(parts[0].trim(), fromDate, toDate);
     }
     
-    private Command parseMarkCommand(String input) throws DukiiException {
+    private Command parseMarkCommand(final String input) throws DukiiException {
         String indexString = input.substring(MARK_PREFIX.length()).trim();
         int index;
         try {
@@ -137,7 +146,7 @@ public class Parser {
         return new MarkCommand(index);
     }
     
-    private Command parseUnmarkCommand(String input) throws DukiiException {
+    private Command parseUnmarkCommand(final String input) throws DukiiException {
         String indexString = input.substring(UNMARK_PREFIX.length()).trim();
         int index;
         try {
@@ -148,7 +157,7 @@ public class Parser {
         return new UnmarkCommand(index);
     }
     
-    private Command parseDeleteCommand(String input) throws DukiiException {
+    private Command parseDeleteCommand(final String input) throws DukiiException {
         String indexString = input.substring(DELETE_PREFIX.length()).trim();
         int index;
         try {
@@ -159,7 +168,7 @@ public class Parser {
         return new DeleteCommand(index);
     }
     
-    private Command parseFindCommand(String input) throws DukiiException {
+    private Command parseFindCommand(final String input) throws DukiiException {
         String keyword = input.substring(FIND_PREFIX.length()).trim();
         if (keyword.isEmpty()) {
             throw new DukiiException("Sweetie, please tell me what you're looking for! Use: find <keyword>");
@@ -167,7 +176,7 @@ public class Parser {
         return new FindCommand(keyword);
     }
     
-    private LocalDate parseDate(String dateString) throws DukiiException {
+    private LocalDate parseDate(final String dateString) throws DukiiException {
         try {
             return LocalDate.parse(dateString);
         } catch (DateTimeParseException e) {
@@ -175,7 +184,7 @@ public class Parser {
         }
     }
     
-    private int parseIndex(String indexString) throws DukiiException {
+    private int parseIndex(final String indexString) throws DukiiException {
         try {
             return Integer.parseInt(indexString);
         } catch (NumberFormatException e) {

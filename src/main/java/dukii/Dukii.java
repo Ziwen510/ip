@@ -29,7 +29,7 @@ import dukii.exception.DukiiException;
  * @author Wang Ziwen & AIs
  * @version 1.0
  */
-public class Dukii {
+public final class Dukii {
     private static final String STORAGE_FILE_PATH = "./data/dukii.txt";
     private static final ArrayList<Task> TASKS = new ArrayList<>();
     private static final TaskList TASK_LIST = new TaskList(TASKS);
@@ -45,7 +45,7 @@ public class Dukii {
      * 
      * @param args command line arguments (not used)
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         UI.showWelcome();
         try {
             ArrayList<Task> loadedTasks = STORAGE.load();
@@ -95,6 +95,8 @@ public class Dukii {
             UI.showMessage("Oh no my sweety, I couldn't save your tasks. Please try again.");
         }
     }
+
+    private Dukii() { }
 }
 
 

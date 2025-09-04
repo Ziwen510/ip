@@ -70,6 +70,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String display = byDate.format(DATE_FORMATTER);
-        return "[" + getTaskType() + "][" + (isDone ? "X" : " ") + "] " + description + " (by: " + display + ")";
+        return "[" + getTaskType() + "][" + (isDone() ? "X" : " ") + "] " + getDescription() + " (by: " + display + ")";
     }
 }

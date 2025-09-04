@@ -83,7 +83,7 @@ public class Event extends Task {
     public String toString() {
         String fromDisplay = fromDate.format(DATE_FORMATTER);
         String toDisplay = toDate.format(DATE_FORMATTER);
-        return "[" + getTaskType() + "][" + (isDone ? "X" : " ") + "] " + description + 
+        return "[" + getTaskType() + "][" + (isDone() ? "X" : " ") + "] " + getDescription() + 
                " (from: " + fromDisplay + " to: " + toDisplay + ")";
     }
 }

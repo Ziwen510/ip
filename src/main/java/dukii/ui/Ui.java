@@ -24,7 +24,7 @@ public class Ui {
      * 
      * @param message the message to display to the user
      */
-    public void showMessage(String message) {
+    public void showMessage(final String message) {
         System.out.println(message);
     }
 
