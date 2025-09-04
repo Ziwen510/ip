@@ -70,8 +70,7 @@ public class MainWindow extends AnchorPane {
                         DialogBox.getDukiiDialog(response, dukiiImage)
                 );
                 userInput.clear();
-                // optional: close window
-                this.getScene().getWindow().hide();
+                javafx.application.Platform.exit();
                 return;
             }
             response = ui.drainMessages();
