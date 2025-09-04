@@ -7,7 +7,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import dukii.Duke;
+import dukii.command.Command;
+import dukii.exception.DukiiException;
+import dukii.parser.Parser;
+import dukii.storage.Storage;
+import dukii.task.Task;
+import dukii.task.TaskList;
 
 /**
  * Controller for the main GUI.
@@ -22,7 +27,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private final String STORAGE_FILE_PATH = "./data/dukii.txt";
+    private final TaskList tasks = new TaskList(new java.util.ArrayList<Task>());
+    private final Storage storage = new Storage(STORAGE_FILE_PATH);
+    private final Ui ui = new Ui();
+    private final Parser parser = new Parser();
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dukii.jpeg"));
@@ -32,15 +41,40 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Duke instance. */
-    public void setDuke(Duke d) {
-        duke = d;
-    }
+    // No external injection required; GUI is wired directly to Dukii components.
 
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response;
+        try {
+            if (input == null || input.trim().isEmpty()) {
+                return;
+            }
+            Command command = parser.parse(input);
+            command.execute(tasks, ui, storage);
+            if (command.modifiesStorage()) {
+                storage.save(tasks.asList());
+            }
+            if (command.isExit()) {
+                response = ui.drainMessages();
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getDukeDialog(response, dukeImage)
+                );
+                userInput.clear();
+                // optional: close window
+                this.getScene().getWindow().hide();
+                return;
+            }
+            response = ui.drainMessages();
+        } catch (DukiiException | java.io.IOException e) {
+            ui.showMessage("Oopsie! " + e.getMessage());
+            response = ui.drainMessages();
+        } catch (Exception e) {
+            ui.showMessage("Oh no my sweety, something unexpected happened. Please try again.");
+            response = ui.drainMessages();
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

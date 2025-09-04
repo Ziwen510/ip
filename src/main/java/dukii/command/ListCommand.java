@@ -37,7 +37,7 @@ public class ListCommand extends Command {
         
         ui.showMessage("Here are the tasks in your list:");
         for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println((i + 1) + "." + tasks.asList().get(i));
+            ui.showMessage((i + 1) + "." + tasks.asList().get(i));
         }
     }
     

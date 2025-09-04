@@ -15,6 +15,7 @@ package dukii.ui;
  * @version 1.0
  */
 public class Ui {
+    private final StringBuilder buffer = new StringBuilder();
     /**
      * Displays a message to the user.
      * 
@@ -26,6 +27,7 @@ public class Ui {
      */
     public void showMessage(final String message) {
         System.out.println(message);
+        buffer.append(message).append(System.lineSeparator());
     }
 
     /**
@@ -35,8 +37,18 @@ public class Ui {
      * application and prompts them to start using the system.</p>
      */
     public void showWelcome() {
-        System.out.println("Hello sweety~ I'm Dukii!");
-        System.out.println("A new day starts! What can I do for you today?");
+        String m1 = "Hello sweety~ I'm Dukii!";
+        String m2 = "A new day starts! What can I do for you today?";
+        System.out.println(m1);
+        System.out.println(m2);
+        buffer.append(m1).append(System.lineSeparator());
+        buffer.append(m2).append(System.lineSeparator());
+    }
+
+    public String drainMessages() {
+        String out = buffer.toString();
+        buffer.setLength(0);
+        return out.isEmpty() ? "" : out.trim();
     }
 }
 

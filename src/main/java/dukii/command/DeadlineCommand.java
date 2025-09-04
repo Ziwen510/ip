@@ -50,7 +50,7 @@ public class DeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(new Deadline(description, byDate));
         ui.showMessage("Got it. I've added this task:");
-        System.out.println("  " + tasks.asList().get(tasks.getSize() - 1));
+        ui.showMessage("  " + tasks.asList().get(tasks.getSize() - 1));
         ui.showMessage("Now you have " + tasks.getSize() + " task(s) in the list.");
     }
 }

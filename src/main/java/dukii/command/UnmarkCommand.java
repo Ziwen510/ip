@@ -64,7 +64,7 @@ public class UnmarkCommand extends Command {
         } else {
             task.markAsPending();
             ui.showMessage("OK, I've marked this task as not done yet:");
-            System.out.println("  " + task);
+            ui.showMessage("  " + task);
         }
     }
 }
