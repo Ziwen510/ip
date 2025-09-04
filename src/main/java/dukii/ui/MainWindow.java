@@ -27,9 +27,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private final String STORAGE_FILE_PATH = "./data/dukii.txt";
+    private final String storageFilePath = "./data/dukii.txt";
     private final TaskList tasks = new TaskList(new java.util.ArrayList<Task>());
-    private final Storage storage = new Storage(STORAGE_FILE_PATH);
+    private final Storage storage = new Storage(storageFilePath);
     private final Ui ui = new Ui();
     private final Parser parser = new Parser();
 
