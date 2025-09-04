@@ -63,7 +63,7 @@ public class MarkCommand extends Command {
         } else {
             task.markAsDone();
             ui.showMessage("Good job sweety! I've marked this task as done:");
-            System.out.println("  " + task);
+            ui.showMessage("  " + task);
         }
     }
 }

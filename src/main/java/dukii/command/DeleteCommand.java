@@ -60,7 +60,7 @@ public class DeleteCommand extends Command {
         Task deletedTask = tasks.getTask(index - 1);
         tasks.removeTask(index - 1);
         ui.showMessage("Noted. I've removed this task:");
-        System.out.println("  " + deletedTask);
+        ui.showMessage("  " + deletedTask);
         ui.showMessage("Now you have " + tasks.getSize() + " task(s) in the list.");
     }
 }

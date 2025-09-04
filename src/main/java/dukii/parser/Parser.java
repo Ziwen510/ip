@@ -52,7 +52,7 @@ public class Parser {
     public Command parse(final String input) throws DukiiException {
         String trimmed = input.trim();
         
-        if (trimmed.equals(BYE_COMMAND)) {
+        if (trimmed.equalsIgnoreCase(BYE_COMMAND)) {
             return new ByeCommand();
         } else if (trimmed.equals(LIST_COMMAND)) {
             return new ListCommand();
