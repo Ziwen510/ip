@@ -25,6 +25,7 @@ public class TaskList {
      * @param tasks the initial collection of tasks
      */
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null;
         this.tasks = tasks;
     }
 
@@ -37,6 +38,7 @@ public class TaskList {
      * @return the ArrayList containing all tasks
      */
     public ArrayList<Task> asList() {
+        assert tasks != null;
         return tasks;
     }
     
@@ -49,10 +51,12 @@ public class TaskList {
     }
     
     public void addTask(Task task) {
+        assert task != null;
         tasks.add(task);
     }
     
     public Task getTask(int index) {
+        assert index >= 0;
         if (index < 0 || index >= tasks.size()) {
             return null;
         }
@@ -60,6 +64,7 @@ public class TaskList {
     }
     
     public void removeTask(int index) {
+        assert index >= 0;
         if (index >= 0 && index < tasks.size()) {
             tasks.remove(index);
         }

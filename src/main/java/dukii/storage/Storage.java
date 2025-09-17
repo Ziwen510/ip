@@ -55,6 +55,7 @@ public class Storage {
      * @param filePath the path to the file where tasks will be stored
      */
     public Storage(final String filePath) {
+        assert filePath != null && !filePath.isEmpty();
         this.filePath = filePath;
     }
 
@@ -73,6 +74,9 @@ public class Storage {
         final Path path = Path.of(filePath);
         final File file = path.toFile();
         
+        assert path != null;
+        assert file != null;
+
         if (!file.exists()) {
             createFileAndDirectories(file);
             return new ArrayList<>();
@@ -81,6 +85,9 @@ public class Storage {
         final List<String> lines = Files.readAllLines(path);
         final ArrayList<Task> tasks = new ArrayList<>();
         
+        assert lines != null;
+        assert tasks != null;
+
         for (String line : lines) {
             if (line == null || line.trim().isEmpty()) {
                 continue;
@@ -107,6 +114,7 @@ public class Storage {
      * @throws IOException if an error occurs during file operations
      */
     public void save(final List<Task> tasks) throws IOException {
+        assert tasks != null;
         final Path path = Path.of(filePath);
         final File file = path.toFile();
         final File parent = file.getParentFile();
@@ -117,6 +125,7 @@ public class Storage {
         
         try (FileWriter writer = new FileWriter(file)) {
             for (Task task : tasks) {
+                assert task != null;
                 writer.write(serializeTask(task));
                 writer.write(System.lineSeparator());
             }
@@ -143,6 +152,7 @@ public class Storage {
      * @return a string representation of the task for storage
      */
     private String serializeTask(final Task task) {
+        assert task != null;
         String status = task.isDone() ? TASK_STATUS_DONE : TASK_STATUS_PENDING;
         
         if (task instanceof ToDo) {
@@ -173,6 +183,7 @@ public class Storage {
      * @return the reconstructed Task object, or null if parsing fails
      */
     private Task parseTask(final String line) {
+        assert line != null;
         String[] parts = line.split("\\s*\\|\\s*");
         if (parts.length < TODO_MIN_PARTS) {
             return null;
