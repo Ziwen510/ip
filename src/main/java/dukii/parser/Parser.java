@@ -11,6 +11,7 @@ import dukii.command.EventCommand;
 import dukii.command.FindCommand;
 import dukii.command.ListCommand;
 import dukii.command.MarkCommand;
+import dukii.command.ScheduleCommand;
 import dukii.command.TodoCommand;
 import dukii.command.UnmarkCommand;
 
@@ -46,6 +47,7 @@ public class Parser {
     private static final String UNMARK_PREFIX = "unmark ";
     private static final String DELETE_PREFIX = "delete ";
     private static final String FIND_PREFIX = "find ";
+    private static final String SCHEDULE_PREFIX = "schedule ";
     private static final String BYE_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     
@@ -61,6 +63,10 @@ public class Parser {
             throw new DukiiException("Sweetie, please tell me what you're looking for! Use: find <keyword>");
         } else if (trimmed.startsWith(FIND_PREFIX)) {
             return parseFindCommand(trimmed);
+        } else if (trimmed.equals("schedule")) {
+            throw new DukiiException("Sweetie, please tell me which date to view! Use: schedule <yyyy-MM-dd>");
+        } else if (trimmed.startsWith(SCHEDULE_PREFIX)) {
+            return parseScheduleCommand(trimmed);
         } else if (trimmed.startsWith(TODO_PREFIX)) {
             return parseTodoCommand(trimmed);
         } else if (trimmed.startsWith(DEADLINE_PREFIX)) {
@@ -186,6 +192,15 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new DukiiException("Honey, please use date format yyyy-MM-dd!");
         }
+    }
+
+    private Command parseScheduleCommand(final String input) throws DukiiException {
+        String dateString = input.substring(SCHEDULE_PREFIX.length()).trim();
+        if (dateString.isEmpty()) {
+            throw new DukiiException("Sweetie, please tell me which date to view! Use: schedule <yyyy-MM-dd>");
+        }
+        LocalDate date = parseDate(dateString);
+        return new ScheduleCommand(date);
     }
     
     private int parseIndex(final String indexString) throws DukiiException {
