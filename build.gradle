@@ -27,10 +27,13 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
+
+    jvmArgs '-ea'
 }
 
 application {
     mainClass = 'dukii.Launcher'
+    applicationDefaultJvmArgs = ['-ea']
 }
 
 shadowJar {
