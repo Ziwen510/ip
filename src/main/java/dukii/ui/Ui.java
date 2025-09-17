@@ -39,10 +39,8 @@ public class Ui {
     public void showWelcome() {
         String m1 = "Hello sweety~ I'm Dukii!";
         String m2 = "A new day starts! What can I do for you today?";
-        System.out.println(m1);
-        System.out.println(m2);
-        buffer.append(m1).append(System.lineSeparator());
-        buffer.append(m2).append(System.lineSeparator());
+        showMessage(m1);
+        showMessage(m2);
     }
 
     public String drainMessages() {

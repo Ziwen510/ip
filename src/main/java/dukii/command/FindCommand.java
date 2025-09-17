@@ -52,12 +52,13 @@ public class FindCommand extends Command {
             return;
         }
         
+        final String normalizedKeyword = keyword.toLowerCase();
         java.util.List<dukii.task.Task> matchingTasks = new java.util.ArrayList<>();
         java.util.List<dukii.task.Task> allTasks = tasks.asList();
         
         for (int i = 0; i < allTasks.size(); i++) {
             dukii.task.Task task = allTasks.get(i);
-            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+            if (task.getDescription().toLowerCase().contains(normalizedKeyword)) {
                 matchingTasks.add(task);
             }
         }
