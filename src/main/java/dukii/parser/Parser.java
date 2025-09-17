@@ -50,6 +50,7 @@ public class Parser {
     private static final String LIST_COMMAND = "list";
     
     public Command parse(final String input) throws DukiiException {
+        assert input != null;
         String trimmed = input.trim();
         
         if (trimmed.equalsIgnoreCase(BYE_COMMAND)) {
@@ -91,6 +92,7 @@ public class Parser {
         }
         
         String[] parts = input.substring(DEADLINE_PREFIX.length()).trim().split(" by ");
+        assert parts != null;
         if (parts.length != 2 || parts[0].isEmpty() || parts[1].isEmpty()) {
             throw new DukiiException("Sweetie, I need both the task and when it's due! Try: deadline <description> by <time>");
         }
@@ -110,6 +112,7 @@ public class Parser {
         }
         
         String[] parts = input.substring(EVENT_PREFIX.length()).trim().split(" from ");
+        assert parts != null;
         if (parts.length != 2 || parts[0].isEmpty() || parts[1].isEmpty()) {
             throw new DukiiException("Hmm, I'm a bit confused! Please tell me: event <description> from <start_time> to <end_time>");
         }
@@ -119,6 +122,7 @@ public class Parser {
         }
         
         String[] timeParts = parts[1].trim().split(" to ");
+        assert timeParts != null;
         if (timeParts.length != 2 || timeParts[0].isEmpty() || timeParts[1].isEmpty()) {
             throw new DukiiException("Oops! I need the complete event details: event <description> from <start_time> to <end_time>");
         }
