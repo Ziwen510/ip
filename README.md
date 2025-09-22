@@ -1,26 +1,58 @@
-# Duke project template
+# Dukii
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Keyboard-first task manager with a friendly GUI. Manage todos, deadlines, and events via simple commands. Dukii auto-saves your tasks and supports both GUI (JavaFX) and CLI modes.
 
-## Setting up in Intellij
+![Screenshot](docs/Ui.png)
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
+## User Guide
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
+For full instructions, command formats, examples, FAQs, and a command summary, see the User Guide:
+
+- docs/User Guide: [docs/README.md](docs/README.md)
+
+## Quick start
+
+Prerequisites: Java 17 or later installed.
+
+1. Clone this repository.
+2. Build a fat JAR:
+   - macOS/Linux:
+     ```
+     ./gradlew shadowJar
+     ```
+   - Windows:
+     ```
+     gradlew.bat shadowJar
+     ```
+3. Run Dukii (GUI):
    ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
+   java -jar build/libs/dukii.jar
+   ```
+   Alternatively, run (CLI, developer mode):
+   ```
+   java -cp build/classes/java/main dukii.Dukii
    ```
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+Data is saved automatically to `./data/dukii.txt` relative to your working directory.
+
+## Features (brief)
+
+- Add todos, deadlines, and events
+- List tasks; mark/unmark; delete
+- Find tasks by keyword
+- View schedule for a date (deadlines due that day, events spanning that day)
+- Exit gracefully
+
+See the full command formats and examples in the [User Guide](docs/README.md).
+
+## Development
+
+- Run tests:
+  ```
+  ./gradlew test
+  ```
+- Run in IDE:
+  - GUI entry point: `dukii.Main`
+  - CLI entry point: `dukii.Dukii`
+- Artifact: `build/libs/dukii.jar`
+
