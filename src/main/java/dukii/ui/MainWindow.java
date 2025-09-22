@@ -16,6 +16,10 @@ import dukii.task.TaskList;
 
 /**
  * Controller for the main GUI.
+ *
+ * <p>Wires user input, command parsing, execution, and response rendering in the
+ * JavaFX interface. Initializes the conversation view, shows the welcome
+ * messages, and appends dialog bubbles for both user and Dukii messages.</p>
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -36,6 +40,9 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
     private final Image dukiiImage = new Image(this.getClass().getResourceAsStream("/images/dukii.jpeg"));
 
+    /**
+     * Initializes the main window after FXML loading.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -50,6 +57,9 @@ public class MainWindow extends AnchorPane {
 
     // No external injection required; GUI is wired directly to Dukii components.
 
+    /**
+     * Handles the send action from the user input field/button.
+     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();

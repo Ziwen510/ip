@@ -51,6 +51,13 @@ public class Parser {
     private static final String BYE_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     
+    /**
+     * Parses the raw user input into a concrete command.
+     *
+     * @param input the raw user input string
+     * @return the concrete {@code Command} represented by the input
+     * @throws DukiiException if the input is invalid or the command is unknown
+     */
     public Command parse(final String input) throws DukiiException {
         assert input != null;
         String trimmed = input.trim();

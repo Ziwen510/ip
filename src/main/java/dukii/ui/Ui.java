@@ -36,6 +36,9 @@ public class Ui {
      * <p>This method shows a friendly greeting to welcome users to the Dukii
      * application and prompts them to start using the system.</p>
      */
+    /**
+     * Shows a friendly welcome message at application start.
+     */
     public void showWelcome() {
         String m1 = "Hello sweety~ I'm Dukii!";
         String m2 = "A new day starts! What can I do for you today?";
@@ -43,6 +46,11 @@ public class Ui {
         showMessage(m2);
     }
 
+    /**
+     * Retrieves and clears the buffered messages for GUI rendering.
+     *
+     * @return the buffered messages as a single string, trimmed; empty if none
+     */
     public String drainMessages() {
         String out = buffer.toString();
         buffer.setLength(0);

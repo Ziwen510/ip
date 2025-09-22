@@ -11,13 +11,27 @@ import dukii.task.Task;
 import dukii.task.TaskList;
 import dukii.ui.Ui;
 
+/**
+ * Command implementation for listing tasks scheduled on a specific date.
+ *
+ * <p>Shows deadlines due on the date and events whose date range contains the
+ * given date. The command does not modify storage.</p>
+ */
 public class ScheduleCommand extends Command {
     private final LocalDate date;
 
+    /**
+     * Constructs a new ScheduleCommand for the given date.
+     *
+     * @param date the date to query the schedule for
+     */
     public ScheduleCommand(LocalDate date) {
         this.date = date;
     }
 
+    /**
+     * Displays tasks that are due or occur on the specified date.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> all = tasks.asList();

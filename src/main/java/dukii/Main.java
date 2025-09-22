@@ -8,8 +8,16 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * JavaFX entry point that launches the GUI for Dukii.
+ */
 public class Main extends Application {
     @Override
+    /**
+     * Starts the JavaFX application and initializes the main window scene.
+     *
+     * @param stage the primary stage for this application
+     */
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
@@ -24,6 +32,11 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Launches the JavaFX application.
+     *
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         launch(args);
     }

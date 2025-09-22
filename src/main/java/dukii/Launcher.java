@@ -6,6 +6,11 @@ package dukii;
 public final class Launcher {
     private Launcher() { }
 
+    /**
+     * Delegates to {@link Main#main(String[])} to launch JavaFX.
+     *
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
         Main.main(args);
     }

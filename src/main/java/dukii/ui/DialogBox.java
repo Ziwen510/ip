@@ -14,6 +14,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * A reusable dialog bubble used in the GUI conversation view.
+ *
+ * <p>Provides factory methods to create dialog bubbles for the user and for
+ * Dukii, rendering avatar image and message text with appropriate alignment.</p>
+ */
 public final class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -41,10 +47,24 @@ public final class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a dialog bubble representing the user's message.
+     *
+     * @param text the message content
+     * @param img the avatar image to display for the user
+     * @return a dialog box aligned to the right
+     */
     public static DialogBox getUserDialog(final String text, final Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a dialog bubble representing Dukii's reply.
+     *
+     * @param text the reply content
+     * @param img the avatar image to display for Dukii
+     * @return a dialog box aligned to the left
+     */
     public static DialogBox getDukiiDialog(final String text, final Image img) {
         DialogBox db = new DialogBox(text, img);
         db.flip();

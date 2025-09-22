@@ -42,19 +42,40 @@ public class TaskList {
         return tasks;
     }
     
+    /**
+     * Returns the number of tasks currently stored.
+     *
+     * @return the size of the task list
+     */
     public int getSize() {
         return tasks.size();
     }
     
+    /**
+     * Checks if the task list contains no tasks.
+     *
+     * @return true if the list is empty, false otherwise
+     */
     public boolean isEmpty() {
         return tasks.isEmpty();
     }
     
+    /**
+     * Adds a task to the end of the list.
+     *
+     * @param task the task to add
+     */
     public void addTask(Task task) {
         assert task != null;
         tasks.add(task);
     }
     
+    /**
+     * Retrieves the task at the given zero-based index.
+     *
+     * @param index the zero-based index of the task
+     * @return the task if the index is within bounds; null otherwise
+     */
     public Task getTask(int index) {
         assert index >= 0;
         if (index < 0 || index >= tasks.size()) {
@@ -63,6 +84,11 @@ public class TaskList {
         return tasks.get(index);
     }
     
+    /**
+     * Removes the task at the given zero-based index if present.
+     *
+     * @param index the zero-based index to remove
+     */
     public void removeTask(int index) {
         assert index >= 0;
         if (index >= 0 && index < tasks.size()) {
