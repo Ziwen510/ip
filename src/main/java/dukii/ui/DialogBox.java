@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Rectangle;
 
 /**
  * A reusable dialog bubble used in the GUI conversation view.
@@ -38,6 +39,13 @@ public final class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        Rectangle clip = new Rectangle();
+        clip.widthProperty().bind(displayPicture.fitWidthProperty());
+        clip.heightProperty().bind(displayPicture.fitHeightProperty());
+        clip.setArcWidth(18);
+        clip.setArcHeight(18);
+        displayPicture.setClip(clip);
     }
 
     private void flip() {
@@ -55,7 +63,9 @@ public final class DialogBox extends HBox {
      * @return a dialog box aligned to the right
      */
     public static DialogBox getUserDialog(final String text, final Image img) {
-        return new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.getStyleClass().add("user");
+        return db;
     }
 
     /**
@@ -68,6 +78,7 @@ public final class DialogBox extends HBox {
     public static DialogBox getDukiiDialog(final String text, final Image img) {
         DialogBox db = new DialogBox(text, img);
         db.flip();
+        db.getStyleClass().add("dukii");
         return db;
     }
 }

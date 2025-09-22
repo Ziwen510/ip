@@ -1,0 +1,46 @@
+.root {
+    -fx-font-family: "SF Pro Text", "Segoe UI", "Inter", system-ui, sans-serif;
+}
+
+.dialog-container {
+    -fx-padding: 10 12 10 12;
+}
+
+.dialog-box { }
+
+.bubble {
+    -fx-background-color: linear-gradient(to bottom right, #EFF6FF, #DBEAFE);
+    -fx-text-fill: #0F172A;
+    -fx-padding: 10 14 10 14;
+    -fx-background-radius: 14 14 2 14; /* user bubble default; Dukii variant overrides */
+    -fx-effect: dropshadow(gaussian, rgba(15,23,42,0.15), 12, 0.3, 0, 2);
+    -fx-border-color: rgba(99,102,241,0.2);
+    -fx-border-radius: 14 14 2 14;
+}
+
+.dukii .bubble {
+    -fx-background-color: linear-gradient(to bottom right, #F8FAFC, #EEF2FF);
+    -fx-background-radius: 14 14 14 2;
+    -fx-border-radius: 14 14 14 2;
+}
+
+/* Explicit alignment per role to avoid conflicts with programmatic flip() */
+.user {
+    -fx-alignment: top-right;
+}
+.dukii {
+    -fx-alignment: top-left;
+}
+
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0.2, 0, 1);
+}
+
+/* Scroll pane aesthetics */
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+.scroll-pane {
+    -fx-background-color: #F8FAFC;
+}
+

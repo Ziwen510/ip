@@ -24,6 +24,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            scene.getStylesheets().add(Main.class.getResource("/view/styles.css").toExternalForm());
+            stage.setTitle("Dukii");
             stage.setMinHeight(220);
             stage.setMinWidth(417);
             stage.show();
